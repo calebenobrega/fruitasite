@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Status — Fruita</title>
+  <meta name="description" content="Estado atual dos serviços da Fruita." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+  <style>
+    .page-head { padding-block: clamp(40px, 6vw, 72px) 0; }
+    .page-head h1 { margin: 16px 0 16px; }
+
+    .status-banner { display: flex; align-items: center; gap: 16px; padding: 22px 26px; border-radius: var(--r-md); background: var(--success-bg); border: 1px solid color-mix(in srgb, var(--success) 30%, transparent); margin-top: 28px; }
+    .status-banner .big-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--success); flex: none; }
+    .status-banner h2 { font-size: 1.25rem; color: #2f5a3c; }
+    .status-banner .when { font-family: var(--data); font-size: .82rem; color: #2f5a3c; opacity: .8; margin-top: 2px; }
+
+    .svc-list { max-width: 760px; margin-top: 36px; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; background: var(--surface); }
+    .svc { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 26px; border-bottom: 1px solid var(--border); }
+    .svc:last-child { border-bottom: 0; }
+    .svc__name { font-weight: 600; font-size: 1.08rem; }
+    .svc__desc { color: var(--ink-2); font-size: .9rem; margin-top: 3px; }
+    .svc__sym { width: 34px; height: 34px; opacity: .9; flex: none; }
+    .svc__left { display: flex; align-items: center; gap: 16px; }
+
+    .legend { max-width: 760px; margin-top: 28px; display: flex; gap: 22px; flex-wrap: wrap; font-family: var(--data); font-size: .82rem; color: var(--ink-2); }
+    .legend span { display: inline-flex; align-items: center; gap: 7px; }
+    .legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+    .note-honest { max-width: 760px; margin-top: 28px; font-family: var(--data); font-size: .86rem; color: var(--ink-2); }
+  </style>
+</head>
+<body data-page="status">
+  <header data-slot="nav"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="kicker">Estado dos serviços</span>
+        <h1>Status</h1>
+        <div class="status-banner">
+          <span class="big-dot dot--pulse" style="color:var(--success)"></span>
+          <div>
+            <h2>Tudo certo com o que está no ar</h2>
+            <div class="when mono">Atualizado em 28 mai 2026, 09:00 (BRT)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section--tight">
+      <div class="wrap">
+        <div class="svc-list">
+          <div class="svc">
+            <div class="svc__left">
+              <img class="svc__sym" src="assets/symbol.svg" alt="" />
+              <div>
+                <div class="svc__name">Fruita Lite</div>
+                <div class="svc__desc">App de listas · app.fruita.com</div>
+              </div>
+            </div>
+            <span class="badge badge--ok"><span class="dot dot--pulse"></span>Operacional</span>
+          </div>
+          <div class="svc">
+            <div class="svc__left">
+              <img class="svc__sym" src="assets/symbol.svg" alt="" />
+              <div>
+                <div class="svc__name">Fruita Comercial</div>
+                <div class="svc__desc">Plataforma B2B · ainda não lançada</div>
+              </div>
+            </div>
+            <span class="badge badge--dev"><span class="dot"></span>Em desenvolvimento</span>
+          </div>
+        </div>
+
+        <div class="legend">
+          <span><i style="background:var(--success)"></i>Operacional</span>
+          <span><i style="background:var(--info)"></i>Em desenvolvimento</span>
+          <span><i style="background:var(--warning)"></i>Manutenção</span>
+          <span><i style="background:var(--error)"></i>Fora do ar</span>
+        </div>
+
+        <p class="note-honest">Não inventamos número de uptime. Quando o Comercial entrar no ar, esta página passa a mostrar disponibilidade de verdade. Avisos de manutenção saem nos <a class="tlink" href="comunicados.html">comunicados <span class="arrow">→</span></a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer data-slot="footer"></footer>
+  <script src="js/site.js"></script>
+</body>
+</html>

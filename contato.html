@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contato — Fruita</title>
+  <meta name="description" content="Fale com a Fruita: dúvida, feedback, parceria ou suporte." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+  <style>
+    .page-head { padding-block: clamp(40px, 6vw, 72px) 0; }
+    .page-head h1 { margin: 16px 0 16px; }
+    .page-head .lead { max-width: 52ch; }
+
+    .contact-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 5vw, 64px); align-items: start; }
+
+    .contact-aside { display: flex; flex-direction: column; gap: 4px; }
+    .contact-block { padding: 22px 0; border-bottom: 1px solid var(--border); }
+    .contact-block:first-child { padding-top: 0; }
+    .contact-block h4 { font-size: .8rem; font-family: var(--data); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; margin-bottom: 8px; }
+    .contact-block a, .contact-block p { font-size: 1.05rem; font-weight: 500; }
+    .contact-block .sub { font-size: .9rem; color: var(--ink-2); font-weight: 400; margin-top: 4px; }
+    .wa { display: inline-flex; align-items: center; gap: 8px; color: var(--green); }
+
+    .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: clamp(28px, 3vw, 40px); }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 7px; }
+    .field input, .field select, .field textarea {
+      width: 100%; font-family: var(--sans); font-size: 1rem; color: var(--ink);
+      padding: .72em .9em; border: 1px solid var(--border-strong); border-radius: var(--r);
+      background: var(--bg); transition: border-color .15s, box-shadow .15s;
+    }
+    .field textarea { resize: vertical; min-height: 130px; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 14%, transparent); }
+    .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: var(--error); }
+    .field .err { color: var(--error); font-size: .8rem; margin-top: 6px; font-family: var(--data); display: none; }
+    .field.invalid .err { display: block; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .form-done { text-align: center; padding: 30px 0; }
+    .form-done .check { width: 56px; height: 56px; border-radius: 50%; background: var(--success-bg); color: var(--success); display: grid; place-items: center; margin: 0 auto 18px; font-size: 1.6rem; }
+    .form-done h3 { margin-bottom: 8px; }
+    .form-done p { color: var(--ink-2); }
+
+    @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; } .two { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page="contato">
+  <header data-slot="nav"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="kicker">Fale com a gente</span>
+        <h1>Contato</h1>
+        <p class="lead">Dúvida, feedback, proposta de parceria ou suporte do Lite — manda pra cá. A gente lê tudo e responde de gente pra gente.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="contact-grid">
+          <aside class="contact-aside">
+            <div class="contact-block">
+              <h4>E-mail direto</h4>
+              <a href="mailto:oi@fruita.com">oi@fruita.com</a>
+              <p class="sub">Resposta em até 2 dias úteis.</p>
+            </div>
+            <div class="contact-block">
+              <h4>WhatsApp</h4>
+              <a class="wa" href="https://wa.me/5511999999999" target="_blank" rel="noopener"><img src="assets/symbol.svg" width="18" height="18" alt="">(11) 99999-9999</a>
+              <p class="sub">Seg a sex, 9h–18h.</p>
+            </div>
+            <div class="contact-block">
+              <h4>Suporte do Lite</h4>
+              <a href="docs.html">Central de ajuda</a>
+              <p class="sub">Como instalar, backup e dúvidas comuns.</p>
+            </div>
+          </aside>
+
+          <div class="form-card">
+            <form id="contatoForm" novalidate>
+              <div class="two">
+                <div class="field">
+                  <label for="c-nome">Nome</label>
+                  <input id="c-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome" required />
+                  <div class="err">Diga seu nome.</div>
+                </div>
+                <div class="field">
+                  <label for="c-email">E-mail</label>
+                  <input id="c-email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com.br" required />
+                  <div class="err">E-mail inválido.</div>
+                </div>
+              </div>
+              <div class="field">
+                <label for="c-assunto">Assunto</label>
+                <select id="c-assunto" name="assunto" required>
+                  <option value="">Selecione…</option>
+                  <option>Dúvida</option>
+                  <option>Feedback</option>
+                  <option>Parceria</option>
+                  <option>Suporte</option>
+                </select>
+                <div class="err">Escolha um assunto.</div>
+              </div>
+              <div class="field">
+                <label for="c-msg">Mensagem</label>
+                <textarea id="c-msg" name="mensagem" placeholder="Conta pra gente…" required></textarea>
+                <div class="err">Escreva sua mensagem.</div>
+              </div>
+              <button class="btn btn--primary btn--block" type="submit">Enviar mensagem</button>
+              <p class="muted" style="font-family:var(--data); font-size:.8rem; margin-top:14px; text-align:center">Enviado com segurança · seus dados não viram lista de spam.</p>
+            </form>
+            <div class="form-done" id="contatoDone" hidden>
+              <div class="check">✓</div>
+              <h3>Mensagem enviada!</h3>
+              <p>Recebemos seu contato. Respondemos no e-mail que você deixou.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-slot="footer"></footer>
+  <script src="js/site.js"></script>
+  <script>
+    (function () {
+      const form = document.getElementById("contatoForm");
+      if (!form) return;
+      const done = document.getElementById("contatoDone");
+      const setInvalid = (el, bad) => el.closest(".field").classList.toggle("invalid", bad);
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let ok = true;
+        const need = ["nome", "assunto", "mensagem"];
+        need.forEach((n) => {
+          const el = form[n];
+          const bad = !el.value.trim();
+          setInvalid(el, bad);
+          if (bad) ok = false;
+        });
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim());
+        setInvalid(form.email, !emailOk);
+        if (!emailOk) ok = false;
+        if (!ok) { form.querySelector(".invalid input, .invalid select, .invalid textarea")?.focus(); return; }
+        form.hidden = true;
+        done.hidden = false;
+      });
+      form.addEventListener("input", function (e) {
+        const f = e.target.closest(".field");
+        if (f && f.classList.contains("invalid")) f.classList.remove("invalid");
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="pt-BR" data-hero="registro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fruita — ferramentas para o hortifrúti</title>
+  <meta name="description" content="A Fruita faz software para quem trabalha com fruta, verdura e legume. Um app gratuito para organizar compras e uma plataforma conectando fornecedores e varejo." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+  <style>
+    /* ---------- HERO: 3 personalidades ---------- */
+    .heroset > .hero { display: none; }
+    [data-hero="registro"] .hero--registro { display: block; }
+    [data-hero="feira"]    .hero--feira    { display: block; }
+    [data-hero="indice"]   .hero--indice   { display: block; }
+
+    /* A — Registro (editorial, institucional) */
+    .hero--registro { padding-block: clamp(48px, 8vw, 96px); position: relative; overflow: hidden; }
+    .hero--registro .wrap { position: relative; z-index: 1; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 0.9fr;
+      gap: clamp(32px, 6vw, 80px);
+      align-items: center;
+    }
+    .hero-grid h1 { margin: 18px 0 24px; max-width: 16ch; }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .hero-seed {
+      position: absolute; top: 50%; right: -8%; translate: 0 -50%;
+      width: min(46vw, 540px); opacity: .06; z-index: 0; pointer-events: none;
+    }
+    /* bloco "registro" — vibe projeto vivo */
+    .ledger {
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .ledger__head {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 18px; border-bottom: 1px solid var(--border);
+      font-family: var(--data); font-size: .74rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--ink-2);
+    }
+    .ledger__row {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 16px 18px; border-bottom: 1px solid var(--border);
+    }
+    .ledger__row:last-child { border-bottom: 0; }
+    .ledger__row .name { font-weight: 600; }
+    .ledger__row .meta { font-family: var(--data); font-size: .8rem; color: var(--ink-2); }
+    .ledger__foot { padding: 14px 18px; background: var(--sunken); }
+
+    /* B — Feira (foto) */
+    .hero--feira { padding-block: clamp(20px, 3vw, 36px); }
+    .hero-photo {
+      position: relative; border-radius: var(--r-lg); overflow: hidden;
+      min-height: clamp(440px, 64vh, 600px); display: flex; align-items: flex-end;
+      border: 1px solid var(--border);
+    }
+    .hero-photo .imgph { position: absolute; inset: 0; border: 0; border-radius: 0; align-items: flex-start; justify-content: flex-end; padding: 22px; }
+    .hero-photo__slot { position: absolute; inset: 0; width: 100%; height: 100%; --slot-bg: var(--sunken); }
+    .hero-photo::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(26,47,37,.15) 0%, rgba(26,47,37,.30) 40%, rgba(26,47,37,.86) 100%);
+    }
+    .hero-photo__content { position: relative; z-index: 1; padding: clamp(28px, 5vw, 56px); color: var(--bg); max-width: 40ch; }
+    .hero-photo__content h1 { color: var(--bg); margin: 16px 0 20px; }
+    .hero-photo__content .lead { color: color-mix(in srgb, var(--bg) 88%, transparent); }
+    .hero-photo .kicker { color: color-mix(in srgb, var(--bg) 92%, transparent); }
+
+    /* C — Índice (portas) */
+    .hero--indice { padding-block: clamp(40px, 6vw, 80px); }
+    .hero-indice__top { max-width: 60ch; margin-bottom: 44px; }
+    .hero-indice__top h1 { margin: 18px 0 0; }
+    .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .door {
+      display: flex; flex-direction: column; gap: 14px;
+      padding: clamp(28px, 3.5vw, 44px);
+      border: 1px solid var(--border); border-radius: var(--r-md);
+      background: var(--surface); transition: border-color .2s, transform .2s, box-shadow .2s;
+      min-height: 280px;
+    }
+    .door:hover { border-color: var(--green); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .door .num { font-family: var(--data); font-size: .8rem; color: var(--green); font-weight: 600; letter-spacing: .08em; }
+    .door h3 { margin-top: 6px; }
+    .door p { color: var(--ink-2); flex: 1; }
+    .door .tlink { margin-top: auto; }
+
+    /* ---------- Produtos ---------- */
+    .prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .prod {
+      display: flex; flex-direction: column;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+    .prod:hover { border-color: var(--border-strong); box-shadow: var(--shadow); }
+    .prod__top { padding: 28px 28px 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .prod__sym { width: 44px; height: 44px; }
+    .prod__body { padding: 22px 28px 28px; display: flex; flex-direction: column; flex: 1; }
+    .prod__body h3 { margin-bottom: 10px; }
+    .prod__body p { color: var(--ink-2); }
+    .prod__list { list-style: none; margin: 18px 0 24px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .prod__list li { display: flex; gap: 10px; align-items: flex-start; font-size: .96rem; }
+    .prod__list li::before { content: ""; width: 16px; height: 16px; margin-top: 3px; flex: none; -webkit-mask: var(--seed-mask) center/contain no-repeat; mask: var(--seed-mask) center/contain no-repeat; background: var(--green); }
+    .prod__cta { margin-top: auto; }
+
+    /* ---------- Persona split ---------- */
+    .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+    .persona {
+      background: var(--surface); padding: clamp(28px, 4vw, 48px);
+      display: flex; flex-direction: column; gap: 14px; transition: background .2s;
+    }
+    .persona:hover { background: var(--sunken); }
+    .persona h3 { margin-top: 4px; }
+    .persona p { color: var(--ink-2); flex: 1; }
+    .persona .who { font-family: var(--data); font-size: .82rem; color: var(--ink-2); letter-spacing: .02em; }
+
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      /* no mobile o título vem primeiro; o status (ledger) entra depois como prova */
+      .hero-grid .ledger { order: 1; }
+      .doors, .prod-grid, .persona-grid { grid-template-columns: 1fr; }
+      /* CTAs do hero: full-width empilhados, alvo de toque maior */
+      .hero-cta { flex-direction: column; align-items: stretch; }
+      .hero-cta .btn { width: 100%; padding-block: 0.95em; }
+    }
+  </style>
+</head>
+<body data-page="home">
+  <header data-slot="nav"></header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <div class="heroset">
+
+      <!-- A · REGISTRO -->
+      <section class="hero hero--registro" data-screen-label="Hero · Registro">
+        <span class="hero-seed seedwm" style="color:var(--green)" aria-hidden="true"></span>
+        <div class="wrap">
+          <div class="hero-grid">
+            <div>
+              <span class="kicker">Hortifrúti · da feira ao CEASA</span>
+              <h1>O hortifrúti brasileiro, com ferramentas à altura.</h1>
+              <p class="lead">A Fruita faz software para quem trabalha com fruta, verdura e legume. Um app gratuito para organizar suas compras hoje — e uma plataforma conectando fornecedores e varejo, em construção.</p>
+              <div class="hero-cta">
+                <a class="btn btn--primary" href="lite.html">Conhecer o Fruita Lite</a>
+                <a class="btn btn--ghost" href="comercial.html">Ver o Comercial <span class="arrow">→</span></a>
+              </div>
+            </div>
+            <aside class="ledger" aria-label="Estado dos produtos">
+              <div class="ledger__head"><span>Produtos</span><span>estado</span></div>
+              <div class="ledger__row">
+                <div><div class="name">Fruita Lite</div><div class="meta">app de listas · v1.2.0</div></div>
+                <span class="badge badge--ok"><span class="dot dot--pulse"></span>Operacional</span>
+              </div>
+              <div class="ledger__row">
+                <div><div class="name">Fruita Comercial</div><div class="meta">marketplace B2B</div></div>
+                <span class="badge badge--dev"><span class="dot"></span>Em desenvolvimento</span>
+              </div>
+              <div class="ledger__foot">
+                <a class="tlink" href="release-notes.html">Acompanhar o progresso <span class="arrow">→</span></a>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- B · FEIRA -->
+      <section class="hero hero--feira" data-screen-label="Hero · Feira">
+        <div class="wrap">
+          <div class="hero-photo">
+            <image-slot id="hero-feira" class="hero-photo__slot" shape="rect" placeholder="Arraste uma foto: balcão de feira / caixas de hortifrúti"></image-slot>
+            <div class="hero-photo__content">
+              <span class="kicker">Hortifrúti · da feira ao CEASA</span>
+              <h1>O hortifrúti brasileiro, com ferramentas à altura.</h1>
+              <p class="lead">Software para quem move fruta, verdura e legume todo dia. Um app gratuito agora — e uma plataforma B2B em construção.</p>
+              <div class="hero-cta">
+                <a class="btn btn--light" href="lite.html">Conhecer o Fruita Lite</a>
+                <a class="btn btn--ghost" style="border-color:rgba(244,242,234,.4);color:var(--bg)" href="comercial.html">Ver o Comercial <span class="arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- C · ÍNDICE -->
+      <section class="hero hero--indice" data-screen-label="Hero · Índice">
+        <div class="wrap">
+          <div class="hero-indice__top">
+            <span class="kicker">Hortifrúti · da feira ao CEASA</span>
+            <h1>Por onde você quer começar?</h1>
+          </div>
+          <div class="doors">
+            <a class="door" href="comercial.html">
+              <span class="num">01 / fornecedor</span>
+              <h3>Vendo hortifrúti no atacado</h3>
+              <p>CEASA, atacadista, produtor. Receba pedidos do varejo e gerencie sua oferta num só lugar — em desenvolvimento.</p>
+              <span class="tlink">Ver o Fruita Comercial <span class="arrow">→</span></span>
+            </a>
+            <a class="door" href="lite.html">
+              <span class="num">02 / varejo</span>
+              <h3>Compro pra revender ou usar</h3>
+              <p>Quitanda, mercadinho, restaurante. Organize suas listas de compra com fornecedores — grátis e funcionando hoje.</p>
+              <span class="tlink">Conhecer o Fruita Lite <span class="arrow">→</span></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <hr class="divider" />
+
+    <!-- ============ DOIS PRODUTOS ============ -->
+    <section class="section" id="produtos">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="idx">01</span>
+          <h2>Dois produtos, um propósito</h2>
+        </div>
+        <div class="prod-grid">
+          <article class="prod reveal">
+            <div class="prod__top">
+              <img class="prod__sym" src="assets/symbol.svg" alt="" />
+              <span class="badge badge--ok"><span class="dot"></span>Disponível</span>
+            </div>
+            <div class="prod__body">
+              <span class="ptag ptag--lite">Fruita Lite</span>
+              <h3 style="margin-top:14px">Sua lista de compras de hortifrúti, organizada</h3>
+              <p>App gratuito para dono de quitanda e feirante montar listas de compra junto aos fornecedores. Funciona offline e instala no celular.</p>
+              <ul class="prod__list">
+                <li>Listas organizadas por fase da compra</li>
+                <li>Catálogo de itens que você mesmo edita</li>
+                <li>Total calculado automaticamente</li>
+              </ul>
+              <div class="prod__cta cluster">
+                <a class="btn btn--primary" href="lite.html">Ver o Lite</a>
+                <a class="tlink" href="https://app.fruita.com" target="_blank" rel="noopener">Instalar <span class="arrow">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod reveal">
+            <div class="prod__top">
+              <img class="prod__sym" src="assets/symbol.svg" alt="" />
+              <span class="badge badge--dev"><span class="dot"></span>Em desenvolvimento</span>
+            </div>
+            <div class="prod__body">
+              <span class="ptag ptag--com">Fruita Comercial</span>
+              <h3 style="margin-top:14px">Conectando fornecedores e varejo</h3>
+              <p>Plataforma B2B que liga CEASA e atacadistas a quitandas, mercadinhos e restaurantes. Pedidos, oferta e gestão num lugar só.</p>
+              <ul class="prod__list">
+                <li>Marketplace fornecedor ↔ varejo</li>
+                <li>Pedidos e cotações sem WhatsApp solto</li>
+                <li>Beta privado em breve</li>
+              </ul>
+              <div class="prod__cta cluster">
+                <a class="btn btn--ghost" href="comercial.html">Ver o roadmap</a>
+                <a class="tlink" href="comercial.html#waitlist">Entrar na lista <span class="arrow">→</span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ============ PERSONA SPLIT ============ -->
+    <section class="section" id="personas">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="idx">02</span>
+          <h2>Você está de que lado do balcão?</h2>
+        </div>
+        <div class="persona-grid">
+          <a class="persona" href="comercial.html">
+            <span class="who">CEASA · atacadista · produtor</span>
+            <h3>Sou fornecedor</h3>
+            <p>Quero alcançar mais varejo, receber pedidos organizados e parar de perder venda no WhatsApp. O Fruita Comercial está sendo construído para isso.</p>
+            <span class="tlink">Ver o que vem por aí <span class="arrow">→</span></span>
+          </a>
+          <a class="persona" href="lite.html">
+            <span class="who">quitanda · mercadinho · restaurante</span>
+            <h3>Sou varejista</h3>
+            <p>Quero organizar minhas compras de hortifrúti sem caderno nem planilha bagunçada. O Fruita Lite já faz isso hoje, de graça.</p>
+            <span class="tlink">Começar com o Lite <span class="arrow">→</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-slot="footer"></footer>
+
+  <script src="js/site.js"></script>
+</body>
+</html>

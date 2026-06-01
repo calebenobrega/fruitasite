@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fruita Lite — sua lista de compras de hortifrúti, organizada</title>
+  <meta name="description" content="App gratuito para dono de quitanda e feirante organizar listas de compra com fornecedores. Instala no celular, funciona offline." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+  <style>
+    /* hero do Lite */
+    .lite-hero { padding-block: clamp(40px, 6vw, 88px); position: relative; overflow: hidden; }
+    .lite-hero .wrap { position: relative; z-index: 1; }
+    .lite-hero__grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+    .lite-hero h1 { margin: 18px 0 22px; max-width: 14ch; }
+    .lite-hero .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .lite-hero .note { margin-top: 16px; font-family: var(--data); font-size: .82rem; color: var(--ink-2); }
+
+    /* mockup de celular */
+    .phone {
+      --w: 280px;
+      width: var(--w); aspect-ratio: 280/580; margin-inline: auto;
+      background: var(--dark); border-radius: 38px; padding: 12px;
+      box-shadow: var(--shadow-lg); position: relative;
+    }
+    .phone__screen { width: 100%; height: 100%; border-radius: 28px; overflow: hidden; background: var(--bg); position: relative; }
+    .phone::before { content: ""; position: absolute; top: 18px; left: 50%; translate: -50% 0; width: 90px; height: 6px; border-radius: 3px; background: rgba(244,242,234,.3); z-index: 2; }
+    .phone .imgph { position: absolute; inset: 0; border: 0; border-radius: 0; }
+    .phone-slot { position: absolute; inset: 0; width: 100%; height: 100%; --slot-bg: var(--bg); }
+    .phone-row { display: flex; gap: 28px; justify-content: center; align-items: flex-end; flex-wrap: wrap; }
+    .phone--sm { --w: 220px; opacity: .96; }
+
+    /* features */
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+    .feat { background: var(--surface); padding: 30px 26px; display: flex; flex-direction: column; gap: 12px; transition: background .2s; }
+    .feat:hover { background: var(--sunken); }
+    .feat__ic { width: 30px; height: 30px; opacity: .92; }
+    .feat h4 { margin-top: 4px; }
+    .feat p { color: var(--ink-2); font-size: .95rem; }
+
+    /* por que usar */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+    .why-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+    .why-list li { padding: 22px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: baseline; }
+    .why-list li:first-child { padding-top: 0; }
+    .why-list li:last-child { border-bottom: 0; }
+    .why-list .n { font-family: var(--data); font-weight: 600; color: var(--green); font-variant-numeric: tabular-nums; }
+    .why-list h4 { margin-bottom: 6px; }
+    .why-list p { color: var(--ink-2); font-size: .96rem; }
+
+    /* FAQ */
+    .faq { max-width: 760px; }
+    .faq details { border-bottom: 1px solid var(--border); }
+    .faq summary { list-style: none; cursor: pointer; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-weight: 600; font-size: 1.05rem; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary .pm { font-family: var(--data); color: var(--green); font-size: 1.4rem; transition: transform .2s; flex: none; line-height: 1; }
+    .faq details[open] summary .pm { transform: rotate(45deg); }
+    .faq details p { padding: 0 0 22px; color: var(--ink-2); max-width: 64ch; }
+
+    /* CTA band */
+    .cta-band { background: var(--green); color: var(--bg); border-radius: var(--r-lg); padding: clamp(36px, 5vw, 64px); position: relative; overflow: hidden; }
+    .cta-band__seed { position: absolute; right: -60px; top: 50%; translate: 0 -50%; width: 300px; opacity: .12; }
+    .cta-band h2 { color: var(--bg); max-width: 18ch; }
+    .cta-band p { color: color-mix(in srgb, var(--bg) 85%, transparent); max-width: 44ch; margin-top: 14px; }
+    .cta-band .cluster { margin-top: 28px; position: relative; z-index: 1; }
+
+    @media (max-width: 860px) {
+      .lite-hero__grid, .why-grid { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .lite-hero__art { order: -1; }
+    }
+    @media (min-width: 861px) and (max-width: 1040px) {
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body data-page="lite">
+  <header data-slot="nav"></header>
+
+  <main>
+    <!-- HERO -->
+    <section class="lite-hero" data-screen-label="Lite · Hero">
+      <div class="wrap">
+        <div class="lite-hero__grid">
+          <div>
+            <div class="eyebrow-row">
+              <span class="ptag ptag--lite">Fruita Lite</span>
+              <span class="badge badge--ok"><span class="dot dot--pulse"></span>Disponível agora · grátis</span>
+            </div>
+            <h1 style="margin-top:18px">Sua lista de compras de hortifrúti, organizada</h1>
+            <p class="lead">Pare de anotar pedido em caderno ou no fim do WhatsApp. O Lite junta tudo que você precisa comprar dos fornecedores num lugar só — e calcula o total pra você.</p>
+            <div class="hero-cta">
+              <a class="btn btn--primary" href="https://app.fruita.com" target="_blank" rel="noopener">Instalar agora</a>
+              <a class="btn btn--ghost" href="#features">Ver o que faz <span class="arrow">→</span></a>
+            </div>
+            <p class="note">Funciona no celular Android e iPhone · instala direto pelo navegador · não precisa de cadastro</p>
+          </div>
+          <div class="lite-hero__art">
+            <div class="phone">
+              <div class="phone__screen">
+                <image-slot id="lite-hero" class="phone-slot" shape="rect" placeholder="Arraste a tela: lista por fase"></image-slot>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="idx">01</span>
+          <h2>O que o Lite faz</h2>
+        </div>
+        <div class="feat-grid">
+          <div class="feat reveal"><img class="feat__ic" src="assets/symbol.svg" alt=""><h4>Listas por fase</h4><p>Separe a compra por etapa — o que pedir hoje, o que deixar pra depois, o que já chegou.</p></div>
+          <div class="feat reveal"><img class="feat__ic" src="assets/symbol.svg" alt=""><h4>Catálogo seu</h4><p>Monte seu próprio catálogo de itens, com unidade e preço de referência. Do seu jeito.</p></div>
+          <div class="feat reveal"><img class="feat__ic" src="assets/symbol.svg" alt=""><h4>Total automático</h4><p>O app soma quantidade × preço enquanto você monta a lista. Sem calculadora na mão.</p></div>
+          <div class="feat reveal"><img class="feat__ic" src="assets/symbol.svg" alt=""><h4>PDF pra compartilhar</h4><p>Exporte a lista em PDF e mande pro fornecedor por onde você já fala com ele.</p></div>
+          <div class="feat reveal"><img class="feat__ic" src="assets/symbol.svg" alt=""><h4>Backup local</h4><p>Seus dados ficam no aparelho. Faça backup e restaure quando trocar de celular.</p></div>
+          <div class="feat reveal"><img class="feat__ic" src="assets/symbol.svg" alt=""><h4>Instala como app</h4><p>É um PWA: instala na tela inicial e abre sem navegador. Funciona mesmo sem internet.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- SCREENSHOTS -->
+    <section class="section" id="telas">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="idx">02</span>
+          <h2>Como é na prática</h2>
+        </div>
+        <div class="phone-row">
+          <div class="phone phone--sm"><div class="phone__screen"><image-slot id="lite-catalogo" class="phone-slot" shape="rect" placeholder="Arraste a tela: catálogo"></image-slot></div></div>
+          <div class="phone"><div class="phone__screen"><image-slot id="lite-total" class="phone-slot" shape="rect" placeholder="Arraste a tela: lista com total"></image-slot></div></div>
+          <div class="phone phone--sm"><div class="phone__screen"><image-slot id="lite-pdf" class="phone-slot" shape="rect" placeholder="Arraste a tela: exportar PDF"></image-slot></div></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- POR QUE USAR -->
+    <section class="section" id="por-que">
+      <div class="wrap">
+        <div class="why-grid">
+          <div>
+            <span class="kicker">Por que usar</span>
+            <h2 style="margin-top:14px">Feito pra rotina de quem compra hortifrúti</h2>
+            <p class="lead" style="margin-top:16px">Sem firula, sem cadastro, sem mensalidade. O Lite resolve a parte chata da compra pra você focar no que importa: comprar bem.</p>
+          </div>
+          <ul class="why-list">
+            <li><span class="n">01</span><div><h4>Mais rápido que caderno</h4><p>Monte a lista em minutos e reaproveite de uma compra pra outra.</p></div></li>
+            <li><span class="n">02</span><div><h4>Menos erro na conta</h4><p>O total sai certo. Você sabe quanto vai gastar antes de fechar o pedido.</p></div></li>
+            <li><span class="n">03</span><div><h4>Funciona offline</h4><p>Na feira de madrugada sem sinal? O app continua respondendo.</p></div></li>
+            <li><span class="n">04</span><div><h4>Seu, de graça</h4><p>Sem plano, sem pegadinha. O Lite é e continua gratuito.</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section--tight">
+      <div class="wrap">
+        <div class="cta-band">
+          <span class="cta-band__seed seedwm" style="color:var(--bg)" aria-hidden="true"></span>
+          <span class="kicker" style="color:color-mix(in srgb, var(--bg) 90%, transparent)">Instalação</span>
+          <h2 style="margin-top:12px">Instale em menos de um minuto</h2>
+          <p>Abra no celular, toque em instalar e pronto. Sem loja de app, sem cadastro.</p>
+          <div class="cluster">
+            <a class="btn btn--light" href="https://app.fruita.com" target="_blank" rel="noopener">Abrir app.fruita.com</a>
+            <a class="btn btn--ghost" href="docs.html" style="border-color:rgba(244,242,234,.4);color:var(--bg)">Como instalar <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="idx">03</span>
+          <h2>Perguntas rápidas</h2>
+        </div>
+        <div class="faq">
+          <details open><summary>Preciso pagar alguma coisa? <span class="pm">+</span></summary><p>Não. O Fruita Lite é gratuito e não tem plano pago escondido. Você instala e usa.</p></details>
+          <details><summary>Funciona sem internet? <span class="pm">+</span></summary><p>Sim. Depois de instalado, o Lite funciona offline. Seus dados ficam salvos no próprio aparelho.</p></details>
+          <details><summary>Meus dados vão pra onde? <span class="pm">+</span></summary><p>Ficam no seu celular. Você controla o backup — exporta e guarda onde quiser. Nada sai do aparelho sem você mandar.</p></details>
+          <details><summary>Como instalo no iPhone? <span class="pm">+</span></summary><p>Abra app.fruita.com no Safari, toque em compartilhar e em "Adicionar à Tela de Início". No Android, o próprio navegador oferece instalar.</p></details>
+          <details><summary>É o mesmo que o Fruita Comercial? <span class="pm">+</span></summary><p>Não. O Lite é o app de listas, pronto e grátis. O <a class="tlink" href="comercial.html">Comercial</a> é a plataforma B2B que liga fornecedores e varejo — ainda em desenvolvimento.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-slot="footer"></footer>
+  <script src="js/site.js"></script>
+  <script src="image-slot.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comunicados — Fruita</title>
+  <meta name="description" content="Avisos oficiais da Fruita: manutenções, mudanças de política e anúncios importantes." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+  <style>
+    .page-head { padding-block: clamp(40px, 6vw, 72px) 0; }
+    .page-head h1 { margin: 16px 0 16px; }
+    .page-head .lead { max-width: 56ch; }
+
+    .avisos { max-width: 760px; }
+    .aviso { border: 1px solid var(--border); border-radius: var(--r-md); background: var(--surface); padding: 28px 30px; margin-bottom: 20px; }
+    .aviso__top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+    .aviso__date { font-family: var(--data); font-size: .82rem; color: var(--ink-2); letter-spacing: .02em; }
+    .aviso h3 { font-size: 1.3rem; margin-bottom: 10px; letter-spacing: -.02em; }
+    .aviso p { color: var(--ink-2); }
+    .aviso p + p { margin-top: 12px; }
+    .aviso__kind { font-family: var(--data); font-size: .68rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .26em .6em; border-radius: var(--r-sm); }
+    .k-manut { background: var(--warning-bg); color: #7e5e1f; }
+    .k-anuncio { background: var(--info-bg); color: #2a4453; }
+    .k-politica { background: var(--sunken); color: var(--ink-2); border: 1px solid var(--border); }
+  </style>
+</head>
+<body data-page="comunicados">
+  <header data-slot="nav"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="kicker">Avisos oficiais</span>
+        <h1>Comunicados</h1>
+        <p class="lead">Manutenções, mudanças de política e anúncios que afetam quem usa a Fruita. Quando algo importante muda, a gente avisa por aqui.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="avisos">
+
+          <article class="aviso">
+            <div class="aviso__top">
+              <span class="aviso__kind k-anuncio">Anúncio</span>
+              <span class="aviso__date">06 mai 2026</span>
+            </div>
+            <h3>Abrimos a lista de espera do Fruita Comercial</h3>
+            <p>A lista de espera do beta privado do Comercial está no ar. Se você é fornecedor ou varejista e quer testar antes, deixe seu contato na página do produto.</p>
+            <p><a class="tlink" href="comercial.html#waitlist">Entrar na lista de espera <span class="arrow">→</span></a></p>
+          </article>
+
+          <article class="aviso">
+            <div class="aviso__top">
+              <span class="aviso__kind k-manut">Manutenção</span>
+              <span class="aviso__date">29 abr 2026</span>
+            </div>
+            <h3>Sincronização de backup ficará fora no domingo de madrugada</h3>
+            <p>No domingo, 03/05, das 2h às 4h, a importação e exportação de backup do Fruita Lite pode ficar indisponível por instabilidade planejada. O uso normal do app — listas e catálogo — segue funcionando offline.</p>
+          </article>
+
+          <article class="aviso">
+            <div class="aviso__top">
+              <span class="aviso__kind k-politica">Política</span>
+              <span class="aviso__date">14 abr 2026</span>
+            </div>
+            <h3>Atualizamos a forma como tratamos seus dados</h3>
+            <p>Reforçamos no texto de privacidade o que já vale na prática: no Fruita Lite, seus dados ficam no seu aparelho. Nada é enviado para nossos servidores sem você exportar manualmente.</p>
+            <p><a class="tlink" href="#">Ler a política de privacidade <span class="arrow">→</span></a></p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-slot="footer"></footer>
+  <script src="js/site.js"></script>
+</body>
+</html>
