@@ -74,12 +74,10 @@
         </button>
         <nav class="nav__menu" aria-label="Navegação principal">
           <div class="nav__links">${links}</div>
-          <a class="btn btn--ghost" href="${p("login.html")}">Entrar</a>
+          <a class="btn btn--ghost" href="https://fruitalite.vercel.app/onboarding" target="_blank" rel="noopener">Entrar</a>
         </nav>
         <div class="nav__right">
-          <a class="btn btn--ghost" href="${p("login.html")}"${
-      PAGE === "login" ? ' aria-current="page"' : ""
-    }>Entrar</a>
+          <a class="btn btn--ghost" href="https://fruitalite.vercel.app/onboarding" target="_blank" rel="noopener">Entrar</a>
         </div>
       </div>`;
 
