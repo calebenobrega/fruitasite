@@ -28,7 +28,7 @@
     }
     .phone__screen { width: 100%; height: 100%; border-radius: 28px; overflow: hidden; background: var(--bg); position: relative; }
     .phone::before { content: ""; position: absolute; top: 18px; left: 50%; translate: -50% 0; width: 90px; height: 6px; border-radius: 3px; background: rgba(244,242,234,.3); z-index: 2; }
-    .phone .imgph { position: absolute; inset: 0; border: 0; border-radius: 0; }
+    .phone .imgph { position: absolute; inset: 0; border: 0; border-radius: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
     .phone-slot { position: absolute; inset: 0; width: 100%; height: 100%; --slot-bg: var(--bg); }
     .phone-row { display: flex; gap: 28px; justify-content: center; align-items: flex-end; flex-wrap: wrap; }
     .phone--sm { --w: 220px; opacity: .96; }
@@ -101,7 +101,7 @@
           <div class="lite-hero__art">
             <div class="phone">
               <div class="phone__screen">
-                <image-slot id="lite-hero" class="phone-slot" shape="rect" placeholder="Arraste a tela: lista por fase"></image-slot>
+                <img src="assets/screen-lista.png" alt="Tela de lista de compras do Fruita Lite" class="phone-slot imgph" />
               </div>
             </div>
           </div>
@@ -139,9 +139,9 @@
           <h2>Como é na prática</h2>
         </div>
         <div class="phone-row">
-          <div class="phone phone--sm"><div class="phone__screen"><image-slot id="lite-catalogo" class="phone-slot" shape="rect" placeholder="Arraste a tela: catálogo"></image-slot></div></div>
-          <div class="phone"><div class="phone__screen"><image-slot id="lite-total" class="phone-slot" shape="rect" placeholder="Arraste a tela: lista com total"></image-slot></div></div>
-          <div class="phone phone--sm"><div class="phone__screen"><image-slot id="lite-pdf" class="phone-slot" shape="rect" placeholder="Arraste a tela: exportar PDF"></image-slot></div></div>
+          <div class="phone phone--sm"><div class="phone__screen"><img src="assets/screen-catalogo.png" alt="Catálogo de produtos do Fruita Lite" class="phone-slot imgph" /></div></div>
+          <div class="phone"><div class="phone__screen"><img src="assets/screen-home.png" alt="Tela inicial do Fruita Lite" class="phone-slot imgph" /></div></div>
+          <div class="phone phone--sm"><div class="phone__screen"><img src="assets/screen-anotacoes.png" alt="Anotações no Fruita Lite" class="phone-slot imgph" /></div></div>
         </div>
       </div>
     </section>
